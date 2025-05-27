@@ -1,8 +1,10 @@
-# Используем официальный образ OpenJDK 17 с Alpine Linux (легковесный)
+# Этап 1: Сборка jar файла
+FROM gradle:8.5-jdk17 AS build
+COPY --chown=gradle:gradle . /app
+WORKDIR /app
+RUN gradle build --no-daemon
+
+# Этап 2: Запуск собранного jar
 FROM openjdk:17-jdk-alpine
-
-# Копируем собранный jar в контейнер
-COPY build/libs/Vtb-0.0.1-SNAPSHOT.jar app.jar
-
-# Указываем команду запуска
+COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
