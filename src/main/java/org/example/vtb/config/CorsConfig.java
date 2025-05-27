@@ -15,7 +15,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // Разрешаем запросы с фронтенда
-        config.addAllowedOrigin("http://localhost:3000"); // URL вашего Nuxt приложения
+        config.addAllowedOrigin("https://vtb-forum.onrender.com"); // URL вашего Nuxt приложения
 
         // Разрешаем все HTTP методы
         config.addAllowedMethod("*");
